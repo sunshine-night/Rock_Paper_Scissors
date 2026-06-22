@@ -54,8 +54,16 @@ function getComputerChoice(){
     return gameChoices[choiceIndex];
 }
 function getHumanChoice(){
-    choice = prompt("choice either Rock, Paper, or Scissor:");
-    return choice.toLowerCase();
+    let choice;
+    try{
+        do{
+        choice = prompt("choice either Rock, Paper, or Scissor:").toLowerCase();
+        }while(!gameChoices.includes(choice));
+    } catch(e){
+        throw new Error("Invalid choice; please refresh the page\nThe game ended");
+    }
+
+    return choice;
 }
 
 
