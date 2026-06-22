@@ -1,29 +1,29 @@
 let gameChoices = ["rock","paper","scissor"];
 
 function playGame(){
-    // let computerScore = humanScore = 0;
-    // let computerChoice, humanChoice;
-    // for(let i=0;i<5;i++){
-    //     console.log(`Round ${i+1}...`);
-    //     computerChoice = getComputerChoice();
-    //     humanChoice = getHumanChoice();
-    //     result = playRound(computerChoice,humanChoice);
-    //     if(result === 1){
-    //         computerScore++;
-    //     } else if(result === -1){
-    //         humanScore++;
-    //     }
-    // }
+    let computerScore = humanScore = 0;
+    let computerChoice, humanChoice;
+    for(let i=0;i<5;i++){
+        console.log(`Round ${i+1}...`);
+        computerChoice = getComputerChoice();
+        humanChoice = getHumanChoice();
+        result = playRound(computerChoice,humanChoice);
+        if(result === 1){
+            computerScore++;
+        } else if(result === -1){
+            humanScore++;
+        }
+    }
 
-    // //decide the final winner
-    // console.log(`Computer score: ${computerScore}\nYour score: ${humanScore}`);
-    // if(computerScore === humanScore){
-    //     console.log("No winner today, it's a draw.");
-    // }else if(computerScore > humanScore){
-    //     console.log("The computer is the final winner.");
-    // }else{
-    //     console.log("Your are the final winner.");
-    // }
+    //decide the final winner
+    console.log(`Computer score: ${computerScore}\nYour score: ${humanScore}`);
+    if(computerScore === humanScore){
+        console.log("No winner today, it's a draw.");
+    }else if(computerScore > humanScore){
+        console.log("The computer is the final winner.");
+    }else{
+        console.log("Your are the final winner.");
+    }
 }
 
 function playRound(computerChoice,humanChoice){
@@ -59,4 +59,4 @@ function getHumanChoice(){
 }
 
 
-// playGame();
+playGame();
