@@ -18,7 +18,7 @@ function getComputerChoice(){
 }
 function getHumanChoice(){
     choice = prompt("choice either Rock, Paper, or Scissor:");
-    return choice;
+    return choice.toLowerCase();
 }
 
-console.log(getComputerChoice());
+console.log(getHumanChoice())
