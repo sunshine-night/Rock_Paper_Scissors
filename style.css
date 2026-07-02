@@ -9,7 +9,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 20px
 }
+
 
 .computer-choice{
     background-color: red;
@@ -18,10 +20,24 @@
 .human-choice{
     display: flex;
     gap: 20px;
+    align-items: center;
+
 }
 
 .result{
-    background-color:green;
+    /* background-color:#F2F2F2; */
+    color: black;
+    font-weight: 400;
+    font-size: 20px;
+    /* font-family: "Bangers", system-ui; */
+    font-style: normal;
+    width: 500px;
+    text-align: center;
+}
+
+.result > span{
+    display: block;
+    padding: 5px;
 }
 
 .human-button{

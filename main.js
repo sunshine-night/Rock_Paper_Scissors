@@ -6,26 +6,31 @@ let roundNumber = 0;
 
 function playGame(humanChoice){
     let computerChoice;
+    clearText();
     roundNumber++;
     if(roundNumber <= MAX_ROUND){
-        console.log(`Round ${roundNumber}...`);
+        displayText(`Round ${roundNumber}...`);
         computerChoice = getComputerChoice();
         result = playRound(computerChoice,humanChoice);
         if(result === 1){
             computerScore++;
+            displayText("The computer won this round!");
         } else if(result === -1){
             humanScore++;
+            displayText("You won this round!");
+        }else{
+            displayText("it's a draw");
         }
     }
     if(roundNumber == MAX_ROUND){
         //decide the final winner
-        console.log(`Computer score: ${computerScore}\nYour score: ${humanScore}`);
+        displayText(`Computer score: ${computerScore}`,`Your score: ${humanScore}`);
         if(computerScore === humanScore){
             console.log("No winner today, it's a draw.");
         }else if(computerScore > humanScore){
-            console.log("The computer is the final winner.");
+            displayText("The computer is the final winner. GG");
         }else{
-            console.log("Your are the final winner.");
+            displayText("Your are the final winner 🎉");
         }
 
         //re-initialize game global variables
@@ -42,18 +47,14 @@ function playRound(computerChoice,humanChoice){
         [GAME_CHOICES[1]]:GAME_CHOICES[0],
         [GAME_CHOICES[2]]:GAME_CHOICES[1]
     };
-    console.log(`You:${humanChoice}\nComputer: ${computerChoice}`);
+    // console.log(`You:${humanChoice}\nComputer: ${computerChoice}`);
 
     if(computerChoice === humanChoice){
-        console.log("it's a draw");
         return 0;
     } else if(winCases[computerChoice] === humanChoice){
-        console.log("The computer won this round!");
         return 1;
     }
-    console.log("You won this round!");
     return -1;
-
 }
 
 function getComputerChoice(){
@@ -69,3 +70,18 @@ humanBtnsContainer.addEventListener('click',(e)=>{
     let value = e.target.value;
     if(GAME_CHOICES.includes(value)) playGame(value);
 })
+
+function displayText(...textArr){
+    const displayBox = document.querySelector(".result");
+    textArr.forEach((text)=>{
+        let textSpan  = document.createElement("span");
+        textSpan.textContent = text;
+        displayBox.appendChild(textSpan);
+    })
+ 
+}
+
+function clearText(){
+    const displayBox = document.querySelector(".result");
+    displayBox.textContent = "";
+}
