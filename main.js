@@ -4,6 +4,37 @@ let computerScore = 0;
 let humanScore = 0;
 let roundNumber = 0;
 
+
+const choicesImgPos = {
+    "rock": "left center",
+    "paper": "right center",
+    "scissor": "center center"
+};
+
+
+
+const compDisplayBox = document.querySelector(".computer-choice");
+let count = 0
+
+function changeImgPos(){
+    if(count<GAME_CHOICES.length){
+        compDisplayBox.setAttribute("style",`background-position: ${choicesImgPos[GAME_CHOICES[count]]}`);
+        count++;
+    }else{
+        count = 0;
+    }
+}
+
+let animateChoicesInterval = setInterval(changeImgPos,150);
+
+function displayCompChoice(choice){
+    clearInterval(animateChoicesInterval);
+    compDisplayBox.setAttribute("style",`background-position: ${choicesImgPos[choice]}`);
+    setTimeout(()=>{
+        animateChoicesInterval = setInterval(changeImgPos,150);
+    },700);
+}
+
 function playGame(humanChoice){
     let computerChoice;
     clearText();
@@ -11,6 +42,7 @@ function playGame(humanChoice){
     if(roundNumber <= MAX_ROUND){
         displayText(`Round ${roundNumber}...`);
         computerChoice = getComputerChoice();
+        displayCompChoice(computerChoice);
         result = playRound(computerChoice,humanChoice);
         if(result === 1){
             computerScore++;

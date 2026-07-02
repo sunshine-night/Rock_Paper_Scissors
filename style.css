@@ -14,7 +14,20 @@
 
 
 .computer-choice{
-    background-color: red;
+    width: 150px;
+    height: 150px;
+    background-image: url("images/rock_paper_scissor.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    /*border: black solid 1px;*/
+}
+
+.separator{
+    color: red;
+    text-align: center;
+    font-size: 30px;
+    font-style: italic;
+    font-weight: bold;
 }
 
 .human-choice{
