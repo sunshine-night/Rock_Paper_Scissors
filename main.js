@@ -1,12 +1,15 @@
-let gameChoices = ["rock","paper","scissor"];
+const GAME_CHOICES = ["rock","paper","scissor"];
+const MAX_ROUND = 5;
+let computerScore = 0;
+let humanScore = 0;
+let roundNumber = 0;
 
-function playGame(){
-    let computerScore = humanScore = 0;
-    let computerChoice, humanChoice;
-    for(let i=0;i<5;i++){
-        console.log(`Round ${i+1}...`);
+function playGame(humanChoice){
+    let computerChoice;
+    roundNumber++;
+    if(roundNumber <= MAX_ROUND){
+        console.log(`Round ${roundNumber}...`);
         computerChoice = getComputerChoice();
-        humanChoice = getHumanChoice();
         result = playRound(computerChoice,humanChoice);
         if(result === 1){
             computerScore++;
@@ -14,15 +17,19 @@ function playGame(){
             humanScore++;
         }
     }
+    if(roundNumber == MAX_ROUND){
+        //decide the final winner
+        console.log(`Computer score: ${computerScore}\nYour score: ${humanScore}`);
+        if(computerScore === humanScore){
+            console.log("No winner today, it's a draw.");
+        }else if(computerScore > humanScore){
+            console.log("The computer is the final winner.");
+        }else{
+            console.log("Your are the final winner.");
+        }
 
-    //decide the final winner
-    console.log(`Computer score: ${computerScore}\nYour score: ${humanScore}`);
-    if(computerScore === humanScore){
-        console.log("No winner today, it's a draw.");
-    }else if(computerScore > humanScore){
-        console.log("The computer is the final winner.");
-    }else{
-        console.log("Your are the final winner.");
+        //re-initialize game global variables
+        humanScore = computerScore = roundNumber = 0;
     }
 }
 
@@ -31,9 +38,9 @@ function playRound(computerChoice,humanChoice){
     // and -1 if human won.
 
     let winCases = {
-        [gameChoices[0]]:gameChoices[2],
-        [gameChoices[1]]:gameChoices[0],
-        [gameChoices[2]]:gameChoices[1]
+        [GAME_CHOICES[0]]:GAME_CHOICES[2],
+        [GAME_CHOICES[1]]:GAME_CHOICES[0],
+        [GAME_CHOICES[2]]:GAME_CHOICES[1]
     };
     console.log(`You:${humanChoice}\nComputer: ${computerChoice}`);
 
@@ -51,20 +58,14 @@ function playRound(computerChoice,humanChoice){
 
 function getComputerChoice(){
     let choiceIndex = Math.floor(Math.random()*3);
-    return gameChoices[choiceIndex];
-}
-function getHumanChoice(){
-    let choice;
-    try{
-        do{
-        choice = prompt("choice either Rock, Paper, or Scissor:").toLowerCase();
-        }while(!gameChoices.includes(choice));
-    } catch(e){
-        throw new Error("Invalid choice; please refresh the page\nThe game ended");
-    }
-
-    return choice;
+    return GAME_CHOICES[choiceIndex];
 }
 
 
-playGame();
+
+const humanBtnsContainer = document.querySelector(".human-choice");
+
+humanBtnsContainer.addEventListener('click',(e)=>{
+    let value = e.target.value;
+    if(GAME_CHOICES.includes(value)) playGame(value);
+})
